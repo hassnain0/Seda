@@ -8,11 +8,13 @@ import Icon from '../helpers/Icons';
 import Button from '../components/Button';
 import Toast from 'react-native-toast-message';
 import util from '../helpers/util';
-// import { signInWithEmailAndPassword,onAuthStateChanged } from "@firebase/auth";
+import { signInWithEmailAndPassword, } from "@firebase/auth";
 import NetInfo from '@react-native-community/netinfo'
 import { useState } from "react";
 import Register from "./Register";
 import Home from "./Home";
+import { auth, db } from "./Firebase";
+
 
 const   Login=({navigation}) =>{
 
@@ -39,51 +41,51 @@ React.useEffect(()=>{
 }) 
 
 
-const checkUser=async(email)=>{
-  try {
-    const mechanicsCollection = db.collection('Registration');
-    const querySnapshot = await mechanicsCollection.where('Email', '==', email).get();
+// const checkUser=async(email)=>{
+//   try {
+//     const mechanicsCollection = db.collection('Registration');
+//     const querySnapshot = await mechanicsCollection.where('Email', '==', email).get();
 
     
-  // Check if there's a matching document
-  if (!querySnapshot.empty) {
-    // Assuming there's only one matching document
-    const doc = querySnapshot.docs[0];
+//   // Check if there's a matching document
+//   if (!querySnapshot.empty) {
+//     // Assuming there's only one matching document
+//     const doc = querySnapshot.docs[0];
 
-    // Access the "Identity" field from the document data
-    const value = doc.data().Identity;
+//     // Access the "Identity" field from the document data
+//     const value = doc.data().Identity;
    
     
-        if (doc.exists) {
+//         if (doc.exists) {
        
-          if(value=='Admin'){
-          return value;
-          }
-          else if(value=='User'){
+//           if(value=='Admin'){
+//           return value;
+//           }
+//           else if(value=='User'){
         
-            return value;
-          }
-          else if(value=='Mechanic'){
-            if(doc.data().Status=='Enabled'){
-              return value;
-            }
-            else
-            { 
-              util.errorMsg("Please wait until adminsitrator allows you") 
-              return  false;
-              }
-          }
-          else{
-            return false
-          }
-    }
-  };
+//             return value;
+//           }
+//           else if(value=='Mechanic'){
+//             if(doc.data().Status=='Enabled'){
+//               return value;
+//             }
+//             else
+//             { 
+//               util.errorMsg("Please wait until adminsitrator allows you") 
+//               return  false;
+//               }
+//           }
+//           else{
+//             return false
+//           }
+//     }
+//   };
 
-  } catch (error) {
-    console.error('Error fetching identity:', error);
-    return null; // Return null in case of an error.
-  }
-}
+//   } catch (error) {
+//     console.error('Error fetching identity:', error);
+//     return null; // Return null in case of an error.
+//   }
+// }
 const SignUpUser=()=>{
   navigation.navigate("Register")
 }
@@ -140,50 +142,34 @@ const SignUpMechanic=()=>{
   };
 
   const login = async () => {
-    navigation.navigate("Home")
-    // try {
-    //       await signInWithEmailAndPassword(auth,state.email,state.password).then(()=>{
-    //         setLoader(false)
-    //   checkUser(state.email) // The function returns a promise.
-    //   .then((Identity) => {
-    //     console.log("Identity",Identity)
-    //     if(Identity==='Admin'){
-    //       navigation.navigate("HomeAdmin")
-    //     }
-    //     else if(Identity==='User'){
-    //       setLoader(false)
-    //       navigation.navigate("HomeUser")
-    //     }
-    //     else if(Identity==='Mechanic'){
-    //       setLoader(false)
-    //       navigation.navigate("HomeMechanic")
-    //     }
-        
-    //   //  navigation.navigate("Login")
-    //     resetForm();
-    //   })
-    //  }).catch(error=>{
+   
+    try {
+          await signInWithEmailAndPassword(auth,state.email,state.password).then(()=>{
+            setLoader(false)
+     navigation.navigate("Home");
+     resetForm();
+     }).catch(error=>{
       
-    //     if(error.code=='auth/too-many-request'){
-    //       setLoader(false);
-    //       util.errorMsg('Too many wrong attempts')
-    //     }
-    //     if(error.code=='auth/wrong-password'){
-    //       setLoader(false); 
-    //       util.errorMsg('Wrong Password')
-    //     }
+        if(error.code=='auth/too-many-request'){
+          setLoader(false);
+          util.errorMsg('Too many wrong attempts')
+        }
+        if(error.code=='auth/wrong-password'){
+          setLoader(false); 
+          util.errorMsg('Wrong Password')
+        }
 
-    //     if(error.code=='auth/user-not-found')
-    //     {
-    //       setLoader(false);
-    //      util.errorMsg("User not found")
-    //     }
+        if(error.code=='auth/user-not-found')
+        {
+          setLoader(false);
+         util.errorMsg("User not found")
+        }
         
-    //     })    
-    // } catch (e) {
+        })    
+    } catch (e) {
   
-    //   console.log('Exception => login', e);
-    // }
+      console.log('Exception => login', e);
+    }
 
 
   };

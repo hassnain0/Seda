@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React,{useEffect} from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   Image
 } from 'react-native';
 import { StyleSheet} from 'react-native';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import {Colors, Metrics} from '../themes';
 import MainTextInput from '../components/MainTextInput';
 import Icon from '../helpers/Icons';
@@ -15,11 +16,32 @@ import NetInfo from '@react-native-community/netinfo'
 import Button from '../components/Button';
 import Toast from 'react-native-toast-message';
 import util from '../helpers/util';
-
+import { auth, db } from './Firebase';
+import { createUserWithEmailAndPassword } from '@firebase/auth';
 
 
 const Register=({navigation})=> {
- 
+  useEffect(()=>{
+    GoogleSignin.configure();
+  })
+  const GoogleSignin=async()=>{
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      setState({ userInfo });
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+    }
+  }
+ const [loader,setLoader]=React.useState(false);
   const [state, setState] = React.useState({
     email: '',
     password: '',  
@@ -53,23 +75,28 @@ const Register=({navigation})=> {
       state;
     if (util.stringIsEmpty(name)) {
       util.errorMsg('Enter User Name');
+      setLoader(false);
       return false;
     }
     if (util.stringIsEmpty(email)) {
         util.errorMsg('Enter Email Address');
+        setLoader(false);
         return false;
       }
       if (util.stringIsEmpty(password)) {
         util.errorMsg('Enter Password');
+        setLoader(false);
         return false;
       }
     if (util.stringIsEmpty(confirmPassword)) {
       util.errorMsg('Enter Confirm Password');
+      setLoader(false);
       return false;
     }
   
     if (util.stringIsEmpty(birthday)) {
         util.errorMsg('Enter Birthday Date');
+        setLoader(false);
         return false;
       }
 
@@ -78,6 +105,7 @@ const Register=({navigation})=> {
     return true;
   };
   const onRegister = () => {
+    setLoader(true);
     if (!_validation()) {
       return false;
     } else{
@@ -90,22 +118,26 @@ const Register=({navigation})=> {
       console.log(err)
       if (err.code === 'auth/email-already-in-use') {
         util.errorMsg("Email Already in use")
+        setLoader(false);
         return false;
     
       }
       if (err.code === 'auth/wrong-password') {
         util.errorMsg("Wrong Password")
+        setLoader(false);
         return false;
     
       }
       if (err.code === 'auth/invalid-email') {
     util.errorMsg("Invalid Email");
+    setLoader(false);
     return false;
       }
     });}
     
     else{
       util.errorMsg("Please connect internet connection");
+      setLoader(false);
       return false;
     }
 }  
@@ -116,13 +148,9 @@ const Register=({navigation})=> {
     await db.collection("Registration").add({
         Name:state.name,
         Email:state.email,
-        PhoneNO:state.phone,
-        CNIC:state.cnic,
-        Identity:"User",
-        Phone2:state.phone2,
-       VehcileDetails:state.vehcile,
-        // Status:"Pending",
+        BirthdayDate:state.birthday,
        }).then(()=>{
+        setLoader(true);
         navigation.navigate("Login") 
        }).catch((error)=>console.log(error))
   
@@ -185,8 +213,8 @@ const Register=({navigation})=> {
              <MainTextInput
              
               secureTextEntry={true}
-              onChangeText={t => _handleTextChange('password', t)}
-              value={state.password}
+              onChangeText={t => _handleTextChange('confirmPassword', t)}
+              value={state.confirmPassword}
               label="Confirm Password"
               autoCapitalize={'none'}
               rightIcon={true}
@@ -194,8 +222,8 @@ const Register=({navigation})=> {
             />
             <MainTextInput
             
-              onChangeText={t => _handleTextChange('phone', t)}
-              value={state.phone}
+              onChangeText={t => _handleTextChange('birthday', t)}
+              value={state.birthday}
               label="Birthday"
               placeholder=""
               keyboardType="number-pad"
@@ -203,7 +231,7 @@ const Register=({navigation})=> {
             />
             <View style={styles.bottomContainer}>
               <View style={styles.buttonView}>
-                <Button
+                <Button loader={loader}
                   btnPress={onRegister}
                   label={"SignUp"}
                 />
@@ -214,7 +242,7 @@ const Register=({navigation})=> {
           
           <View style={styles.socialButtonContainer}>
             
-          <TouchableOpacity style={styles.socialButton}>
+          <TouchableOpacity style={styles.socialButton} onPress={GoogleSignin}>
        
             <Image source={require('../assets/google.png')} style={styles.socialButtonIcon} />
           </TouchableOpacity>

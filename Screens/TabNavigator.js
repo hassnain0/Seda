@@ -1,7 +1,7 @@
 // TabNavigator.js
 
 import React from 'react';
-import {Image} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './Home'; // Import your Home screen component
 // import Screen2 from './Screen2'; // Import other screens you want in the tabs
@@ -23,44 +23,117 @@ const tabBarOptions = {
   };
 const TabNavigator = () => {
   return (
-    <Tab.Navigator tabBarOptions={tabBarOptions}>
-         <Tab.Screen name="Sale" component={Sale} options={{headerTitleAlign:'center',tabBarIcon: ({ color, size }) => (
-           <Image source={require('../assets/Sale.png')} style={{width:30,height:30}}></Image>
+    <Tab.Navigator screenOptions={{
+      tabBarStyle: {backgroundColor: "#083166"}
+    }}>
+         <Tab.Screen name="Sale" component={Sale} options={{tabBarIcon: ({ color, size }) => (
+           <Image source={require('../assets/Sale.png')}style={{width:22,height:22}}></Image>
            ),headerStyle: {
           backgroundColor: '#083166', // Set your desired header color
           
-        }}}/>
+        }, headerTitle: () => (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          
+            <Image
+              source={require('../assets/Logo.png')}
+              style={{ width: 110, height: 37 }}
+            />
+          </View>
+        ),}}/>
      
-        <Tab.Screen name="Categories" component={Categories} options={{headerTitleAlign:'center',tabBarIcon: ({ color, size }) => (
-           <Image source={require('../assets/Categories.png')}style={{width:30,height:30}} ></Image>
+        <Tab.Screen name="Categories" component={Categories}  options={{ tabBarIcon: ({ color, size }) => (
+           <Image source={require('../assets/Categories.png')}style={{width:22,height:22}} ></Image>
            ),headerStyle: {
           backgroundColor: '#083166', // Set your desired header color
           
-        }}}/>
+        },
+        headerTitle: () => (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+           
+            <Image
+              source={require('../assets/Logo.png')}
+              style={{ width: 110, height: 37 }}
+            />
+          </View>
+        ),}}/>
       <Tab.Screen name="Home" component={Home} options={{headerTitleAlign:'center',tabBarIcon: ({ color, size }) => (
-           <Image source={require('../assets/Home.png')} style={{width:30,height:30}}></Image>
+           <Image source={require('../assets/Home.png')} style={{width:22,height:22}}></Image>
            ),headerStyle: {
           backgroundColor: '#083166', // Set your desired header color
           
-        }}}/> 
-      <Tab.Screen name="Designers" component={Designers} options={{headerTitleAlign:'center',tabBarIcon: ({ color, size }) => (
-           <Image source={require('../assets/Designers.png')}style={{width:30,height:30}} ></Image>
+        },
+        headerTitle: () => (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          
+            <Image
+              source={require('../assets/Logo.png')}
+              style={{ width: 110, height: 37 ,marginRight:60}}
+            />
+              <TouchableOpacity><Image
+              source={require('../assets/Table.png')}
+              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+            /></TouchableOpacity>
+              <TouchableOpacity><Image
+              source={require('../assets/Matrix.png')}
+              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+            />
+            </TouchableOpacity>
+            <TouchableOpacity><Image
+              source={require('../assets/Square.png')}
+              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+            />
+            </TouchableOpacity>
+            <TouchableOpacity><Image
+              source={require('../assets/Search.png')}
+              style={{ width: 30, height: 27 ,left:20}}
+            />
+            </TouchableOpacity>
+
+          </View>
+        ),}}/> 
+      <Tab.Screen name="Designers" component={Designers} options={{tabBarIcon: ({ color, size }) => (
+           <Image source={require('../assets/Designers.png')}style={{width:22,height:22}} ></Image>
            ),headerStyle: {
           backgroundColor: '#083166', // Set your desired header color
           
-        }}}/>
-         <Tab.Screen name="Brands" component={Brands} options={{headerTitleAlign:'center',tabBarIcon: ({ color, size }) => (
-           <Image source={require('../assets/Brands.png')}style={{width:30,height:30}} ></Image>
+        },
+        headerTitle: () => (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+           
+            <Image
+              source={require('../assets/Logo.png')}
+              style={{ width: 110, height: 37 }}
+            />
+          </View>
+        ),}}/>
+         <Tab.Screen name="Brands" component={Brands} options={{tabBarIcon: ({ color, size }) => (
+           <Image source={require('../assets/Brands.png')}style={{width:22,height:22}} ></Image>
            ),headerStyle: {
           backgroundColor: '#083166', // Set your desired header color
           
-        }}}/>
-         <Tab.Screen name="Cart" component={Cart} options={{headerTitleAlign:'center',tabBarIcon: ({ color, size }) => (
-           <Image source={require('../assets/Cart.png')}style={{width:20,height:30}} ></Image>
+        }, headerTitle: () => (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          
+            <Image
+              source={require('../assets/Logo.png')}
+              style={{ width: 110, height: 37 }}
+            />
+          </View>
+        ),}}/>
+         <Tab.Screen name="Cart" component={Cart} options={{tabBarIcon: ({ color, size }) => (
+           <Image source={require('../assets/Cart.png')}style={{width:22,height:24}} ></Image>
            ),headerStyle: {
           backgroundColor: '#083166', // Set your desired header color
           
-        }}}/>
+        }, headerTitle: () => (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          
+            <Image
+              source={require('../assets/Logo.png')}
+              style={{ width: 110, height: 37 }}
+            />
+          </View>
+        ),}}/>
       
     </Tab.Navigator>
   );
