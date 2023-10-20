@@ -2,7 +2,7 @@ import React ,{useEffect} from 'react';
 import {StyleSheet,ImageBackground} from 'react-native';
 import LottieView from 'lottie-react-native';
 import Login from './Login';
-import { Metrics } from '../themes';
+import { Metrics } from '../themes/Matrics';
 
 const  SplashScreen = ({navigation}) => {
 
@@ -23,15 +23,16 @@ const  SplashScreen = ({navigation}) => {
 };
 const styles = StyleSheet.create({
     image: {
-        width: Metrics.ratio(380),
-        height: Metrics.ratio(900),
+        width:(380),
+        height: (900),
       
       },
       LottieView:{
         paddingTop:650,
         left:160,
-        width: Metrics.ratio(50),
-        height: Metrics.ratio(100),
+        width: (50),
+        height:(100),
+        
       }
  
 });

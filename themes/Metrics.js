@@ -43,7 +43,7 @@ export default {
   vh,
   generatedFontSize,
   smallMargin: ratio(8),
-  baseMargin: ratio(5),
+  baseMargin: ratio(16),
   doubleBaseMargin: ratio(32),
   statusBarHeight: STATUSBAR_HEIGHT,
   hairLineWidth: StyleSheet.hairlineWidth,

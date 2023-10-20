@@ -12,6 +12,7 @@ import util from '../helpers/util';
 import NetInfo from '@react-native-community/netinfo'
 import { useState } from "react";
 import Register from "./Register";
+import Home from "./Home";
 
 const   Login=({navigation}) =>{
 
@@ -139,49 +140,50 @@ const SignUpMechanic=()=>{
   };
 
   const login = async () => {
-    try {
-          await signInWithEmailAndPassword(auth,state.email,state.password).then(()=>{
-            setLoader(false)
-      checkUser(state.email) // The function returns a promise.
-      .then((Identity) => {
-        console.log("Identity",Identity)
-        if(Identity==='Admin'){
-          navigation.navigate("HomeAdmin")
-        }
-        else if(Identity==='User'){
-          setLoader(false)
-          navigation.navigate("HomeUser")
-        }
-        else if(Identity==='Mechanic'){
-          setLoader(false)
-          navigation.navigate("HomeMechanic")
-        }
+    navigation.navigate("Home")
+    // try {
+    //       await signInWithEmailAndPassword(auth,state.email,state.password).then(()=>{
+    //         setLoader(false)
+    //   checkUser(state.email) // The function returns a promise.
+    //   .then((Identity) => {
+    //     console.log("Identity",Identity)
+    //     if(Identity==='Admin'){
+    //       navigation.navigate("HomeAdmin")
+    //     }
+    //     else if(Identity==='User'){
+    //       setLoader(false)
+    //       navigation.navigate("HomeUser")
+    //     }
+    //     else if(Identity==='Mechanic'){
+    //       setLoader(false)
+    //       navigation.navigate("HomeMechanic")
+    //     }
         
-      //  navigation.navigate("Login")
-        resetForm();
-      })
-     }).catch(error=>{
+    //   //  navigation.navigate("Login")
+    //     resetForm();
+    //   })
+    //  }).catch(error=>{
       
-        if(error.code=='auth/too-many-request'){
-          setLoader(false);
-          util.errorMsg('Too many wrong attempts')
-        }
-        if(error.code=='auth/wrong-password'){
-          setLoader(false); 
-          util.errorMsg('Wrong Password')
-        }
+    //     if(error.code=='auth/too-many-request'){
+    //       setLoader(false);
+    //       util.errorMsg('Too many wrong attempts')
+    //     }
+    //     if(error.code=='auth/wrong-password'){
+    //       setLoader(false); 
+    //       util.errorMsg('Wrong Password')
+    //     }
 
-        if(error.code=='auth/user-not-found')
-        {
-          setLoader(false);
-         util.errorMsg("User not found")
-        }
+    //     if(error.code=='auth/user-not-found')
+    //     {
+    //       setLoader(false);
+    //      util.errorMsg("User not found")
+    //     }
         
-        })    
-    } catch (e) {
+    //     })    
+    // } catch (e) {
   
-      console.log('Exception => login', e);
-    }
+    //   console.log('Exception => login', e);
+    // }
 
 
   };
@@ -234,12 +236,7 @@ const SignUpMechanic=()=>{
           <View style={styles.buttonView}>
             <Button  btnPress={SignUpUser}  label={'SignUP'} />
           </View>
-          <TouchableOpacity
-            onPress={SignUpMechanic}
-            style={styles.RegisterView}>
-            <Text style={styles.registerText}>Continue as guest</Text>
-          </TouchableOpacity>
-
+    
           <View style={styles.socialButtonContainer}>
           <TouchableOpacity style={styles.socialButton}>
             
@@ -255,7 +252,13 @@ const SignUpMechanic=()=>{
             {/* Add Instagram button icon/image here */}
             <Image source={require('../assets/Apple.png')} style={styles.socialButtonIcon} />
           </TouchableOpacity>
+          
         </View>
+        <TouchableOpacity
+            onPress={SignUpMechanic}
+            style={styles.RegisterView}>
+            <Text style={styles.registerText}>Continue as guest</Text>
+          </TouchableOpacity>
         </View>
         <Toast ref={ref => Toast.setRef(ref)} />
       </SafeAreaView>

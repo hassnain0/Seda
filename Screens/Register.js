@@ -19,16 +19,14 @@ import util from '../helpers/util';
 
 
 const Register=({navigation})=> {
+ 
   const [state, setState] = React.useState({
     email: '',
-    password: '',
-    cnic: '',
-     shop: '',
-     address:'',
+    password: '',  
     name: '',
-    phone: '',
-   phone2:'',
-    password: '',
+    birthday:'',
+   confirmPassword:'',
+
   });
   const [isConnected,setIsConnected]=React.useState(true)
 
@@ -51,7 +49,7 @@ const Register=({navigation})=> {
  
 
   const _validation = () => {
-    const {email, name, phone, phone2,cnic,password, vehcile} =
+    const {email, name, confirmPassword,password,birthday } =
       state;
     if (util.stringIsEmpty(name)) {
       util.errorMsg('Enter User Name');
@@ -65,27 +63,23 @@ const Register=({navigation})=> {
         util.errorMsg('Enter Password');
         return false;
       }
-    if (util.stringIsEmpty(phone)) {
-      util.errorMsg('Enter Phone Number');
+    if (util.stringIsEmpty(confirmPassword)) {
+      util.errorMsg('Enter Confirm Password');
       return false;
     }
   
-    if (util.stringIsEmpty(cnic)) {
-        util.errorMsg('Enter CNIC No');
+    if (util.stringIsEmpty(birthday)) {
+        util.errorMsg('Enter Birthday Date');
         return false;
       }
 
-    if (util.stringIsEmpty(vehcile)) {
-        util.errorMsg('Enter Vehcile Detaisl');
-        return false;
-      }
-    
+   
      
     return true;
   };
   const onRegister = () => {
     if (!_validation()) {
-      return;
+      return false;
     } else{
         if(isConnected){
      createUserWithEmailAndPassword(auth,state.email,state.password).then(userCredentials=>{
@@ -158,12 +152,7 @@ const Register=({navigation})=> {
         <ScrollView>
           <View style={styles.registeredContainer}>
             <MainTextInput
-              Icon={
-                <Icon.FontAwesome5
-                  name="user-circle"
-                  style={styles.iconStyle}
-                />
-              }
+             
               onChangeText={t => _handleTextChange('name', t)}
               value={state.name}
               label="Username"
@@ -173,7 +162,9 @@ const Register=({navigation})=> {
             />
 
             <MainTextInput
-              
+               Icon={
+                  <Icon.FontAwesome5 name="car-side" style={styles.iconStyle} />
+                }
               onChangeText={t => _handleTextChange('email', t)}
               value={state.email}
               label="Email"
@@ -182,12 +173,7 @@ const Register=({navigation})=> {
               autoCapitalize={'none'}
             />
             <MainTextInput
-              Icon={
-                <Icon.MaterialCommunityIcons
-                  name="email"
-                  style={styles.iconStyle}
-                />
-              }
+            
               secureTextEntry={true}
               onChangeText={t => _handleTextChange('password', t)}
               value={state.password}
@@ -197,12 +183,7 @@ const Register=({navigation})=> {
               passowrdhide={true}
             />
              <MainTextInput
-              Icon={
-                <Icon.MaterialCommunityIcons
-                  name="email"
-                  style={styles.iconStyle}
-                />
-              }
+             
               secureTextEntry={true}
               onChangeText={t => _handleTextChange('password', t)}
               value={state.password}
@@ -212,7 +193,7 @@ const Register=({navigation})=> {
               passowrdhide={true}
             />
             <MainTextInput
-              Icon={<Icon.FontAwesome5 name="phone" style={styles.iconStyle} />}
+            
               onChangeText={t => _handleTextChange('phone', t)}
               value={state.phone}
               label="Birthday"
@@ -220,10 +201,6 @@ const Register=({navigation})=> {
               keyboardType="number-pad"
               autoCapitalize={'none'}
             />
-
-
-
-           
             <View style={styles.bottomContainer}>
               <View style={styles.buttonView}>
                 <Button
@@ -232,11 +209,13 @@ const Register=({navigation})=> {
                 />
               </View>
             </View>
-          </View>
-           <Toast ref={ref => Toast.setRef(ref)} />
-           <View style={styles.socialButtonContainer}>
-          <TouchableOpacity style={styles.socialButton}>
             
+          </View>
+          
+          <View style={styles.socialButtonContainer}>
+            
+          <TouchableOpacity style={styles.socialButton}>
+       
             <Image source={require('../assets/google.png')} style={styles.socialButtonIcon} />
           </TouchableOpacity>
 
@@ -250,8 +229,9 @@ const Register=({navigation})=> {
             <Image source={require('../assets/Apple.png')} style={styles.socialButtonIcon} />
           </TouchableOpacity>
         </View>
+          
         </ScrollView>
-      
+        <Toast ref={ref => Toast.setRef(ref)} />
       </SafeAreaView>
     
   );
@@ -295,6 +275,7 @@ const styles=StyleSheet.create({
         paddingLeft: Metrics.ratio(20),
       },
       socialButtonContainer: {
+        marginTop:Metrics.ratio(20),
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { View, Image, TouchableOpacity } from "react-native";
-import { Colors } from "../../themes";
+import { Colors } from "../../themes/Colors";
 import styles from "./styles";
 
 import { TextInput } from "react-native-paper";
@@ -69,10 +69,10 @@ const MainTextInput = (props) => {
                 
                 maxFontSizeMultiplier={20}
                 placeholder={placeholder}
-                placeholderTextColor={Colors.placeholderColor}
+                // placeholderTextColor={Colors.placeholderColor}
                 mode="flat"
-                underlineColor={Colors.borderColor}
-                theme={{ colors: { primary: Colors.themeColor } }}
+                // underlineColor={Colors.borderColor}
+                theme={{ colors: { primary: '#083166' } }}
                 style={styles.input}
                 dense={true}
                 onChangeText={onChange}
@@ -82,8 +82,7 @@ const MainTextInput = (props) => {
                 secureTextEntry={isSecure}
                 {...rest}
             />
-            {renderHidePasswrd()}
-            {renderRightIcon()}
+           
         </View>
     );
 };

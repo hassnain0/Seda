@@ -143,7 +143,7 @@ export default {
   // themeColor:'#683441',
   themeColor:'#083166',
   // subHeading: "#D5D5D5",
-  // placeholderColor: "#D5D5D5",
+  placeholderColor: "#D5D5D5",
   // inputColor: "#4E4E4E",
   // descriptionColor: "#676767",
   // borderColor: "#E6E6E6",
@@ -159,7 +159,7 @@ export default {
   placeholderColor: "#b6b6b6",
   inputColor: "#676767",
   descriptionColor: "#7E7E7E",
-  borderColor: "black",
+  borderColor: "#E6E6E6",
   
   subHeading: "#4E4E4E",
   logoutColor: "#D80101",
