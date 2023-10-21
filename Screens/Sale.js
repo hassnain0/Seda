@@ -1,10 +1,12 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View,Text} from 'react-native';
 
 const Sale=()=>{
 return (
     <View>
-        
+       <View>
+        <Text>Noma</Text>
+        </View> 
     </View>
 )
 }

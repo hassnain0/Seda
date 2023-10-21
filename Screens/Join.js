@@ -1,14 +1,14 @@
-import  React,{useEffect} from 'react';
+import  React,{useCallback, useEffect, useState} from 'react';
 import {
   View,
   Text,
   SafeAreaView,
-  TouchableOpacity,
+  TextInput,
   ScrollView,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 import { StyleSheet} from 'react-native';
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import {Colors, Metrics} from '../themes';
 import MainTextInput from '../components/MainTextInput';
 import Icon from '../helpers/Icons';
@@ -17,37 +17,27 @@ import Button from '../components/Button';
 import Toast from 'react-native-toast-message';
 import util from '../helpers/util';
 import { auth, db } from './Firebase';
-import { createUserWithEmailAndPassword } from '@firebase/auth';
+import ImagePicker,{launchImageLibrary} from 'react-native-image-picker';
 
+const Join=({navigation})=> {
 
-const Register=({navigation})=> {
-  useEffect(()=>{
-    // GoogleSignin.configure();
-  })
-  const GoogleSignin=async()=>{
-    try {
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      setState({ userInfo });
-    } catch (error) {
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        // user cancelled the login flow
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        // operation (e.g. sign in) is in progress already
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        // play services not available or outdated
-      } else {
-        // some other error happened
-      }
-    }
-  }
+ 
+  
  const [loader,setLoader]=React.useState(false);
+ const [ImageData,setImageData]=useState(null);
   const [state, setState] = React.useState({
+    image:null,
     email: '',
-    password: '',  
+   phone:'',
+   Nationality:'',
+   website:'',
+   brandName:'',
+   dateofBrand:'',
+   AvailableDesign:'',
+   PiecesDesign:'',
     name: '',
     birthday:'',
-   confirmPassword:'',
+  
 
   });
   const [isConnected,setIsConnected]=React.useState(true)
@@ -71,192 +61,266 @@ const Register=({navigation})=> {
  
 
   const _validation = () => {
-    const {email, name, confirmPassword,password,birthday } =
+    const {email, name,Nationality,phone,brandName,dateofBrand,website,SocialMedia,AvailableDesign,PiecesDesign,birthday } =
       state;
     if (util.stringIsEmpty(name)) {
-      util.errorMsg('Enter User Name');
+      util.errorMsg('Enter  Name');
       setLoader(false);
       return false;
     }
-    if (util.stringIsEmpty(email)) {
-        util.errorMsg('Enter Email Address');
-        setLoader(false);
-        return false;
-      }
-      if (util.stringIsEmpty(password)) {
-        util.errorMsg('Enter Password');
-        setLoader(false);
-        return false;
-      }
-    if (util.stringIsEmpty(confirmPassword)) {
-      util.errorMsg('Enter Confirm Password');
-      setLoader(false);
-      return false;
-    }
-  
     if (util.stringIsEmpty(birthday)) {
         util.errorMsg('Enter Birthday Date');
         setLoader(false);
         return false;
       }
-
-   
-     
+      if (util.stringIsEmpty(phone)) {
+        util.errorMsg('Enter Phone Number');
+        setLoader(false);
+        return false;
+      }
+    if (util.stringIsEmpty(email)) {
+        util.errorMsg('Enter Email Address');
+        setLoader(false);
+        return false;
+      }
+      if (util.stringIsEmpty(Nationality)) {
+        util.errorMsg('Enter Nationality');
+        setLoader(false);
+        return false;
+      }
+    if (util.stringIsEmpty(brandName)) {
+      util.errorMsg('Enter Brand Name');
+      setLoader(false);
+      return false;
+    }
+    if (util.stringIsEmpty(dateofBrand)) {
+      util.errorMsg('Enter Brand Date');
+      setLoader(false);
+      return false;
+    }
+    if (util.stringIsEmpty(website)) {
+      util.errorMsg('Enter website');
+      setLoader(false);
+      return false;
+    }
+  
+    if (util.stringIsEmpty(AvailableDesign)) {
+        util.errorMsg('Enter Available Design');
+        setLoader(false);
+        return false;
+      }
+      if (util.stringIsEmpty(PiecesDesign)) {
+        util.errorMsg('Enter Pieces Design');
+        setLoader(false);
+        return false;
+      }
     return true;
   };
   const onRegister = () => {
     setLoader(true);
     if (!_validation()) {
+      setLoader(false)
       return false;
-    } else{
-        if(isConnected){
-     createUserWithEmailAndPassword(auth,state.email,state.password).then(userCredentials=>{
-        onRegisterApiCall();
-      
-     })
-     .catch((err) => {
-      console.log(err)
-      if (err.code === 'auth/email-already-in-use') {
-        util.errorMsg("Email Already in use")
-        setLoader(false);
-        return false;
-    
-      }
-      if (err.code === 'auth/wrong-password') {
-        util.errorMsg("Wrong Password")
-        setLoader(false);
-        return false;
-    
-      }
-      if (err.code === 'auth/invalid-email') {
-    util.errorMsg("Invalid Email");
-    setLoader(false);
-    return false;
-      }
-    });}
-    
+    } 
     else{
-      util.errorMsg("Please connect internet connection");
+      setLoader(false)
+    }
+    if(!ImageData. && ImageData==null){
+      util.errorMsg("Please select Images")
       setLoader(false);
       return false;
+      
     }
-}  
+   
+    
+    
   };
+//Options For Media Selection
+  const options = {
+    mediaType: 'mixed', // Allow both photos and videos
+    quality: 0.5, // Adjust image quality as needed
+    maxWidth: 800, // Adjust the maximum image width
+    maxHeight: 600, // Adjust the maximum image height
+    allowsEditing: false, // Whether to allow image editing
+    noData: true, // If true, removes the base64-encoded data field from the response
+    mimeTypes: ['image/jpeg', 'image/jpg', 'image/png',],
+    selectionLimit:5,
+  };
+  const ImageSelect=async()=>{
+    if (!_validation()) {
+      util.errorMsg("Please enter above Details")
+      return false;
+      
+    }
 
+// You can also use as a promise without 'callback':
+const result = await launchImageLibrary(options);
+console.log(result);
+if (result.didCancel) {
+  console.log('Image picker was canceled');
+} else if (result.error) {
+  console.log('Image picker error:', result.error);
+} else {
+  const { uri, type,} = result;
+
+  if (['image/jpeg', 'image/jpg', 'image/png'].includes(type)) {
+    // The selected file is a JPG, JPEG, or PNG image
+    setImageData(uri);
+    // You can handle the image here
+  } else {
+    // The selected file is not a supported format
+    console.log('Unsupported file format');
+  }
+}
+  }
   const onRegisterApiCall = async ()=> {
   
-    await db.collection("Registration").add({
+    await db.collection("Shops").add({
         Name:state.name,
         Email:state.email,
         BirthdayDate:state.birthday,
+        Phone:state.phone,
+        Nationality:state.Nationality,
+        BrandName:state.brandName,
+        Website:state.website,
+        AvailableDesign:state.AvailableDesign,
+        PiecesDesign:state.PiecesDesign,
+        ImageChoose:ImageData,
        }).then(()=>{
-        setLoader(true);
-        navigation.navigate("Login") 
+        setLoader(false);
+
        }).catch((error)=>console.log(error))
   
    resetForm();
-   util.successMsg("Successfully Registered")
+   util.successMsg(" Congratulations You're Successfully Registered")
   };
 
   const resetForm = () => {
     setState({
         email: '',
-        password: '',
-        cnic: '',
         name: '',
         phone: '',
-     vehcile:'',
-             password: '',
-      
+        website:'',
+        brandName:'',
+        Nationality:'',
+        AvailableDesign:'',
+        birthday:'',
     });
   };
 
   return (
       <SafeAreaView style={styles.container}>
          <View style={styles.logoView}>
-          <Image style={styles.logo} source={require('../assets/Logo.png')} />
+         
         </View>
         
         <ScrollView>
+        <Text style={styles.TextContainer}>Open a SEDA Shop</Text>
           <View style={styles.registeredContainer}>
             <MainTextInput
              
               onChangeText={t => _handleTextChange('name', t)}
               value={state.name}
-              label="Username"
+              label="Name"
               placeholder=""
-              //   keyboardType=''
+            
               autoCapitalize={'none'}
             />
 
             <MainTextInput
-               Icon={
-                  <Icon.FontAwesome5 name="car-side" style={styles.iconStyle} />
-                }
-              onChangeText={t => _handleTextChange('email', t)}
-              value={state.email}
-              label="Email"
-              placeholder=""
-              keyboardType={'email-address'}
-              autoCapitalize={'none'}
-            />
-            <MainTextInput
-            
-              secureTextEntry={true}
-              onChangeText={t => _handleTextChange('password', t)}
-              value={state.password}
-              label="Password"
-              autoCapitalize={'none'}
-              rightIcon={true}
-              passowrdhide={true}
-            />
-             <MainTextInput
-             
-              secureTextEntry={true}
-              onChangeText={t => _handleTextChange('confirmPassword', t)}
-              value={state.confirmPassword}
-              label="Confirm Password"
-              autoCapitalize={'none'}
-              rightIcon={true}
-              passowrdhide={true}
-            />
-            <MainTextInput
-            
+              
               onChangeText={t => _handleTextChange('birthday', t)}
               value={state.birthday}
-              label="Birthday"
+              label="Date of Birth"
+              placeholder=""
+              keyboardType={'numeric'}
+              autoCapitalize={'none'}
+            />
+            
+            <MainTextInput
+            
+              onChangeText={t => _handleTextChange('phone', t)}
+              value={state.phone}
+              label="Phone Number"
               placeholder=""
               keyboardType="number-pad"
               autoCapitalize={'none'}
             />
-            <View style={styles.bottomContainer}>
+              <MainTextInput
+            
+            onChangeText={t => _handleTextChange('email', t)}
+            value={state.email}
+            label="Email"
+            placeholder=""
+            autoCapitalize={'none'}
+          />
+           <MainTextInput
+            
+            onChangeText={t => _handleTextChange('Nationality', t)}
+            value={state.Nationality}
+            label="Nationality"
+            placeholder=""
+            autoCapitalize={'none'}
+          />
+           <MainTextInput
+            
+            onChangeText={t => _handleTextChange('brandName', t)}
+            value={state.brandName}
+            label="Brand Name"
+            placeholder=""
+            
+            autoCapitalize={'none'}
+          />
+           <MainTextInput
+            
+            onChangeText={t => _handleTextChange('dateofBrand', t)}
+            value={state.dateofBrand}
+            label="Date of brands establishment"
+            placeholder=""
+            keyboardType="number-pad"
+            autoCapitalize={'none'}
+          />
+          <MainTextInput
+            
+            onChangeText={t => _handleTextChange('website', t)}
+            value={state.website}
+            label="Website (Reference)"
+            placeholder=""
+            autoCapitalize={'none'}
+          />
+      
+           <MainTextInput
+            
+            onChangeText={t => _handleTextChange('AvailableDesign', t)}
+            value={state.AvailableDesign}
+            label="Number of Available Design"
+            placeholder=""
+            autoCapitalize={'none'}
+          />
+           <MainTextInput
+            
+            onChangeText={t => _handleTextChange('PiecesDesign', t)}
+            value={state.PiecesDesign}
+            label="Pieces of each Design (all sizes)"
+            placeholder=""
+            autoCapitalize={'none'}
+          />
+<Text style={styles.BottomTextContainer}>Add some products images</Text>
+<TouchableOpacity onPress={ImageSelect}>
+  <Image style={styles.ImageContainer} source={require('../assets/ImagePicker.png')}></Image>
+</TouchableOpacity> 
+       
               <View style={styles.buttonView}>
                 <Button loader={loader}
                   btnPress={onRegister}
-                  label={"SignUp"}
+                  label={"Apply"}
                 />
-              </View>
+            
             </View>
             
           </View>
           
-          <View style={styles.socialButtonContainer}>
-            
-          <TouchableOpacity style={styles.socialButton} onPress={GoogleSignin}>
-       
-            <Image source={require('../assets/google.png')} style={styles.socialButtonIcon} />
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.socialButton}>
-            {/* Add Facebook button icon/image here */}
-            <Image source={require('../assets/facebook.png')} style={styles.socialButtonIcon} />
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.socialButton}>
-            {/* Add Instagram button icon/image here */}
-            <Image source={require('../assets/Apple.png')} style={styles.socialButtonIcon} />
-          </TouchableOpacity>
-        </View>
+         
           
         </ScrollView>
         <Toast ref={ref => Toast.setRef(ref)} />
@@ -302,11 +366,24 @@ const styles=StyleSheet.create({
         fontWeight: 'bold',
         paddingLeft: Metrics.ratio(20),
       },
+      ImageContainer:{
+        marginLeft:Metrics.ratio(40),
+        marginRight:Metrics.ratio(30),
+height:Metrics.ratio(150),
+width:Metrics.ratio(270)
+      },
       socialButtonContainer: {
         marginTop:Metrics.ratio(20),
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         
+      },
+      BottomTextContainer:{
+            fontSize:15,
+            marginLeft:Metrics.ratio(35),
+            color:'#4C4C4C',
+            paddingTop:Metrics.ratio(5),
+
       },
       socialButton: {
         backgroundColor: 'white', // Set your desired background color for the buttons
@@ -325,6 +402,13 @@ const styles=StyleSheet.create({
         resizeMode: 'contain',
         width: Metrics.ratio(200),
         height: Metrics.ratio(170),
+      },
+      TextContainer:{
+        marginTop:Metrics.ratio(20),
+        fontSize:25, 
+        textDecorationLine: 'underline', 
+        color:'#083166',
+        left:Metrics.ratio(30),
       },
       logoText: {
         color: Colors.descriptionColor,
@@ -346,7 +430,7 @@ const styles=StyleSheet.create({
 borderRadius:Metrics.ratio(70),
         marginTop: Metrics.ratio(20),
         width: Metrics.vw * 60,
-        marginHorizontal: Metrics.vw * 20,
+        marginHorizontal: Metrics.vw * 40,
         justifyContent: "center",
         alignItems: "center",
       },
@@ -356,7 +440,7 @@ borderRadius:Metrics.ratio(70),
 borderRadius:Metrics.ratio(30),
         marginTop: Metrics.ratio(20),
         width: Metrics.vw * 60,
-        marginHorizontal: Metrics.vw * 20,
+        marginHorizontal: Metrics.vw * 50,
         justifyContent: "center",
         alignItems: "center",
       },
@@ -364,11 +448,7 @@ borderRadius:Metrics.ratio(30),
         fontSize: Metrics.ratio(20),
         color: Colors.themeColor,
       },
-      bottomContainer: {
-        flex: 1,
-
-        // backgroundColor: "red",
-      },
+     
     
       genderRow: {
         flex: 1.5,
@@ -430,4 +510,4 @@ borderRadius:Metrics.ratio(30),
       
     }
 })
-export default Register;
+export default Join;

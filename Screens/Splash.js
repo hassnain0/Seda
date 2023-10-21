@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
       LottieView:{
         paddingTop:650,
         left:160,
-        width: (50),
+        width:(50),
         height:(100),
         
       }

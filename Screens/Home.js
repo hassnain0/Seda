@@ -4,6 +4,10 @@ import Text from '../components/Text'
 import { Colors, Metrics } from '../themes'
 import Icon from '../helpers/Icons'
 import TabNavigator from './TabNavigator'
+// import { createDrawerNavigator } from '@react-navigation/drawer';
+
+
+// const Drawer = createDrawerNavigator();
 
 const Home=({navigation})=>{
     
