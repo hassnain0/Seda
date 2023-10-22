@@ -125,7 +125,7 @@ const Join=({navigation})=> {
     else{
       setLoader(false)
     }
-    if(!ImageData. && ImageData==null){
+    if( ImageData==null){
       util.errorMsg("Please select Images")
       setLoader(false);
       return false;
