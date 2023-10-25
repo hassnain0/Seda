@@ -63,7 +63,7 @@ const TabNavigator = () => {
      
       
          <Tab.Screen name="Brands" component={Brands} options={{tabBarIcon: ({ color, size }) => (
-           <Image source={require('../assets/Brands.png')}style={{width:22,height:22}} ></Image>
+           <Image source={require('../assets/Brands.png')}style={{width:22,height:21}} ></Image>
            ),headerStyle: {
           backgroundColor: '#083166', // Set your desired header color
           
@@ -132,7 +132,7 @@ const TabNavigator = () => {
           </View>
         )}}/>
         <Tab.Screen name="Designers" component={Designers} options={{tabBarIcon: ({ color, size }) => (
-           <Image source={require('../assets/Designers.png')}style={{width:22,height:19}} ></Image>
+           <Image source={require('../assets/Designers.png')}style={{width:22,height:25}} ></Image>
            ),headerStyle: {
           backgroundColor: '#083166', // Set your desired header color
           
@@ -167,7 +167,7 @@ const TabNavigator = () => {
           </View>
         ),}}/>
          <Tab.Screen name="Cart" component={Cart} options={{tabBarIcon: ({ color, size }) => (
-           <Image source={require('../assets/Cart.png')}style={{width:22,height:24}} ></Image>
+           <Image source={require('../assets/Cart.png')}style={{width:22,height:31}} ></Image>
            ),headerStyle: {
           backgroundColor: '#083166', // Set your desired header color
           

@@ -13,7 +13,7 @@ import NetInfo from '@react-native-community/netinfo'
 import { useState } from "react";
 import Register from "./Register";
 import Home from "./Home";
-import { auth, db } from "./Firebase";
+import { auth,  } from "./Firebase";
 
 
 const   Login=({navigation}) =>{
@@ -90,9 +90,6 @@ const SignUpUser=()=>{
   navigation.navigate("Register")
 }
 
-const SignUpMechanic=()=>{
-  navigation.navigate("SignUpMechanic")
-}
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
@@ -144,28 +141,31 @@ const SignUpMechanic=()=>{
   const login = async () => {
    
     try {
-          await signInWithEmailAndPassword(auth,state.email,state.password).then(()=>{
-            setLoader(false)
-     navigation.navigate("Home");
-     resetForm();
-     }).catch(error=>{
+      navigation.navigate("Home");
       
-        if(error.code=='auth/too-many-request'){
-          setLoader(false);
-          util.errorMsg('Too many wrong attempts')
-        }
-        if(error.code=='auth/wrong-password'){
-          setLoader(false); 
-          util.errorMsg('Wrong Password')
-        }
+    //       await signInWithEmailAndPassword(auth,state.email,state.password).then(()=>{
+    //         console.log("Works")
+    //         setLoader(false)
+    //  navigation.navigate("Home");
+    //  resetForm();
+    //  }).catch(error=>{
+      
+    //     if(error.code=='auth/too-many-request'){
+    //       setLoader(false);
+    //       util.errorMsg('Too many wrong attempts')
+    //     }
+    //     if(error.code=='auth/wrong-password'){
+    //       setLoader(false); 
+    //       util.errorMsg('Wrong Password')
+    //     }
 
-        if(error.code=='auth/user-not-found')
-        {
-          setLoader(false);
-         util.errorMsg("User not found")
-        }
+    //     if(error.code=='auth/user-not-found')
+    //     {
+    //       setLoader(false);
+    //      util.errorMsg("User not found")
+    //     }
         
-        })    
+    //     })    
     } catch (e) {
   
       console.log('Exception => login', e);
@@ -241,7 +241,7 @@ const SignUpMechanic=()=>{
           
         </View>
         <TouchableOpacity
-            onPress={SignUpMechanic}
+           
             style={styles.RegisterView}>
             <Text style={styles.registerText}>Continue as guest</Text>
           </TouchableOpacity>

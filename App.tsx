@@ -16,7 +16,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-       <Stack.Screen name='Home' component={TabNavigator} options={{ headerShown:false,statusBarColor:'#083166',headerTitleAlign:'center',headerTintColor:'white',headerStyle: {
+      <Stack.Screen name='Home' component={TabNavigator} options={{ headerShown:false,statusBarColor:'#083166',headerTitleAlign:'center',headerTintColor:'white',headerStyle: {
           backgroundColor: '#083166', // Set your desired header color
         },}}/>
       <Stack.Screen name='SplashScreen' component={SplashScreen} options={{ headerShown:false,}}/>
