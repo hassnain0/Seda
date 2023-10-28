@@ -12,7 +12,7 @@ const RoundImage = ({ imageSource }) => (
   </View>
 );
 data=[
-  { id: '1', imageSource: require('../assets/MinBoutique.png') },
+{ id: '1', imageSource: require('../assets/MinBoutique.png') },
 { id: '2', imageSource: require('../assets/Wahaj.png') },
 { id: '3', imageSource: require('../assets/Kai.png') },
 { id: '4', imageSource: require('../assets/Noma.png') },

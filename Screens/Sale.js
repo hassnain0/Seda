@@ -6,6 +6,7 @@ import { Metrics } from '../themes';
 
 
 const products = [
+  
   { id: '1', imageSource: require('../assets/WhiteSleeve.png'), name: 'White short sleeve blouse', price: 'KWD25.00', size: 'M' },
   { id: '2', imageSource: require('../assets/WhiteSleeve.png'), name: 'White short sleeve blouse', price: 'KWD25.00', size: 'L' },
   { id: '3', imageSource: require('../assets/WhiteSleeve.png'), name: 'White short sleeve blouse', price: 'KWD25.00', size: 'S' },
@@ -22,11 +23,10 @@ const ProductItem = ({ product }) => {
     <View style={styles.productItem}>
      <View style={styles.imageContainer}>
         <Image source={product.imageSource} style={styles.productImage} />
-        {isFavorite && (
-          <View style={styles.trolleyIconContainer}>
+                  <View style={styles.trolleyIconContainer}>
             <Image source={require('../assets/Trolley.png')} style={styles.trolleyIcon} />
           </View>
-        )}
+        
       </View>
       
       <Text style={styles.ProductContainer}>{product.name}</Text>
@@ -186,6 +186,10 @@ const styles=StyleSheet.create({
         backgroundColor: 'transparent',
         
       },
+        trolleyIcon: {
+    width: Metrics.ratio(20),
+    height: Metrics.ratio(20),
+  },
     
     
 })

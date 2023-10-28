@@ -11,6 +11,8 @@ import Designers from './Designers';
 import Brands from './Brands';
 import Sale from './Sale';
 import Cart from './Cart';
+import { Metrics } from '../themes';
+import styles from '../components/MainTextInput/styles';
 
 
 const Tab = createBottomTabNavigator();
@@ -57,7 +59,11 @@ const TabNavigator = () => {
               style={{ width: 30, height: 27 ,left:20}}
             />
             </TouchableOpacity>
-
+            <TouchableOpacity><Image
+              source={require('../assets/Search.png')}
+              style={styles}
+            />
+            </TouchableOpacity>
           </View>
         ),}}/>
      
@@ -128,6 +134,11 @@ const TabNavigator = () => {
               style={{ width: 30, height: 27 ,left:20}}
             />
             </TouchableOpacity>
+            <TouchableOpacity><Image
+              source={require('../assets/Search.png')}
+              style={{ width: 30, height: 27 ,left:20}}
+            />
+            </TouchableOpacity>
 
           </View>
         )}}/>
@@ -163,7 +174,11 @@ const TabNavigator = () => {
               style={{ width: 30, height: 27 ,left:20}}
             />
             </TouchableOpacity>
-
+            <TouchableOpacity><Image
+              source={require('../assets/Search.png')}
+              style={{ width: 30, height: 27 ,left:20}}
+            />
+            </TouchableOpacity>
           </View>
         ),}}/>
          <Tab.Screen name="Cart" component={Cart} options={{tabBarIcon: ({ color, size }) => (
@@ -197,7 +212,11 @@ const TabNavigator = () => {
               style={{ width: 30, height: 27 ,left:20}}
             />
             </TouchableOpacity>
-
+            <TouchableOpacity><Image
+              source={require('../assets/Search.png')}
+              style={{ width: 30, height: 27 ,left:20}}
+            />
+            </TouchableOpacity>
           </View>
         ),}}/>
       
