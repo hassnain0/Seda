@@ -1,7 +1,7 @@
 // TabNavigator.js
 
 import React from 'react';
-import {Image, TouchableOpacity, View} from 'react-native';
+import {StyleSheet,Image, TouchableOpacity, View} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './Home'; // Import your Home screen component
 // import Screen2 from './Screen2'; // Import other screens you want in the tabs
@@ -12,7 +12,7 @@ import Brands from './Brands';
 import Sale from './Sale';
 import Cart from './Cart';
 import { Metrics } from '../themes';
-import styles from '../components/MainTextInput/styles';
+
 
 
 const Tab = createBottomTabNavigator();
@@ -38,7 +38,7 @@ const TabNavigator = () => {
           
             <Image
               source={require('../assets/Logo.png')}
-              style={{ width: 110, height: 37 ,marginRight:60}}
+              style={{ width: 110, height: 37 ,marginRight:40}}
             />
               <TouchableOpacity><Image
               source={require('../assets/Table.png')}
@@ -46,22 +46,23 @@ const TabNavigator = () => {
             /></TouchableOpacity>
               <TouchableOpacity><Image
               source={require('../assets/Matrix.png')}
-              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+              style={{ width: Metrics.ratio(30), height:Metrics.ratio(27) ,left:20,marginRight:Metrics.ratio(2)}}
             />
             </TouchableOpacity>
             <TouchableOpacity><Image
               source={require('../assets/Square.png')}
-              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+              style={{ width: Metrics.ratio(30), height: Metrics.ratio(27) ,left:Metrics.ratio(30),marginRight:Metrics.ratio(20)}}
             />
             </TouchableOpacity>
             <TouchableOpacity><Image
               source={require('../assets/Search.png')}
-              style={{ width: 30, height: 27 ,left:20}}
+              style={styles.IconContainer}
+
             />
             </TouchableOpacity>
             <TouchableOpacity><Image
-              source={require('../assets/Search.png')}
-              style={styles}
+              source={require('../assets/Cart.png')}
+              style={{  width: Metrics.ratio(20), height: Metrics.ratio(27) ,left:Metrics.ratio(30) ,marginRight:Metrics.ratio(2)}}
             />
             </TouchableOpacity>
           </View>
@@ -82,21 +83,23 @@ const TabNavigator = () => {
             />
               <TouchableOpacity><Image
               source={require('../assets/Table.png')}
-              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
-            /></TouchableOpacity>
+              style={{ width: Metrics.ratio(30), height: Metrics.ratio(30) ,left:Metrics.ratio(30),marginRight:Metrics.baseMargin}}
+              /></TouchableOpacity>
               <TouchableOpacity><Image
               source={require('../assets/Matrix.png')}
-              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+              style={{ width: Metrics.ratio(30), height: Metrics.ratio(30) ,left:Metrics.ratio(30),marginRight:Metrics.baseMargin}}
+
             />
             </TouchableOpacity>
             <TouchableOpacity><Image
               source={require('../assets/Square.png')}
-              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+              style={{ width: Metrics.ratio(30), height: Metrics.ratio(30) ,left:Metrics.ratio(30),marginRight:Metrics.baseMargin}}
+
             />
             </TouchableOpacity>
             <TouchableOpacity><Image
               source={require('../assets/Search.png')}
-              style={{ width: 30, height: 27 ,left:20}}
+              style={styles.IconContainer}
             />
             </TouchableOpacity>
 
@@ -113,30 +116,30 @@ const TabNavigator = () => {
           
             <Image
               source={require('../assets/Logo.png')}
-              style={{ width: 110, height: 37 ,marginRight:60}}
+              style={styles.IconContainer}
             />
               <TouchableOpacity><Image
               source={require('../assets/Table.png')}
-              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+              style={styles.IconContainer}
             /></TouchableOpacity>
               <TouchableOpacity><Image
               source={require('../assets/Matrix.png')}
-              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+              style={styles.IconContainer}
             />
             </TouchableOpacity>
             <TouchableOpacity><Image
               source={require('../assets/Square.png')}
-              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+              style={styles.IconContainer}
             />
             </TouchableOpacity>
             <TouchableOpacity><Image
               source={require('../assets/Search.png')}
-              style={{ width: 30, height: 27 ,left:20}}
+              style={styles.IconContainer}
             />
             </TouchableOpacity>
             <TouchableOpacity><Image
               source={require('../assets/Search.png')}
-              style={{ width: 30, height: 27 ,left:20}}
+              style={styles.IconContainer}
             />
             </TouchableOpacity>
 
@@ -157,26 +160,28 @@ const TabNavigator = () => {
             />
               <TouchableOpacity><Image
               source={require('../assets/Table.png')}
-              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+              style={styles.IconContainer}
+
             /></TouchableOpacity>
               <TouchableOpacity><Image
               source={require('../assets/Matrix.png')}
-              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+             style={{ width: Metrics.ratio(30), height: Metrics.ratio(30) ,left:Metrics.ratio(30),marginRight:Metrics.baseMargin}}
+
             />
             </TouchableOpacity>
             <TouchableOpacity><Image
               source={require('../assets/Square.png')}
-              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+              style={styles.IconContainer}
             />
             </TouchableOpacity>
             <TouchableOpacity><Image
               source={require('../assets/Search.png')}
-              style={{ width: 30, height: 27 ,left:20}}
+              style={styles.IconContainer}
             />
             </TouchableOpacity>
             <TouchableOpacity><Image
               source={require('../assets/Search.png')}
-              style={{ width: 30, height: 27 ,left:20}}
+              style={styles.IconContainer}
             />
             </TouchableOpacity>
           </View>
@@ -195,26 +200,25 @@ const TabNavigator = () => {
             />
               <TouchableOpacity><Image
               source={require('../assets/Table.png')}
-              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
-            /></TouchableOpacity>
+              style={styles.IconContainer}            /></TouchableOpacity>
               <TouchableOpacity><Image
               source={require('../assets/Matrix.png')}
-              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+              style={styles.IconContainer}
             />
             </TouchableOpacity>
             <TouchableOpacity><Image
               source={require('../assets/Square.png')}
-              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+              style={styles.IconContainer}
             />
             </TouchableOpacity>
             <TouchableOpacity><Image
               source={require('../assets/Search.png')}
-              style={{ width: 30, height: 27 ,left:20}}
+              style={styles.IconContainer}
             />
             </TouchableOpacity>
             <TouchableOpacity><Image
               source={require('../assets/Search.png')}
-              style={{ width: 30, height: 27 ,left:20}}
+              style={styles.IconContainer}
             />
             </TouchableOpacity>
           </View>
@@ -223,5 +227,11 @@ const TabNavigator = () => {
     </Tab.Navigator>
   );
 };
-
+const styles=StyleSheet.create({
+  IconContainer:{
+    width: Metrics.ratio(30),
+    height: Metrics.ratio(30) ,
+    left:Metrics.ratio(20)
+  }
+  })
 export default TabNavigator;

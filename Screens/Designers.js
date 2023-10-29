@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {View,Text, StyleSheet, FlatList,Image,ScrollView, Animated} from 'react-native';
+import {View,Text, StyleSheet, FlatList,Image,ScrollView, Animated, TouchableOpacity} from 'react-native';
 import { Metrics } from '../themes';
 
 const RoundImage = ({ imageSource }) => (
@@ -69,24 +69,30 @@ return (
       <View style={styles.imageContainer}>
         <View style={styles.row}>
           
+        <TouchableOpacity>
           <Image
             source={require('../assets/Featured.png')}
             style={styles.image}
           />
+          </TouchableOpacity>
+          <TouchableOpacity>
             <Image
             source={require('../assets/Accessories.png')}
             style={styles.image2}
-          />
+          /></TouchableOpacity>
         </View>
         <View style={styles.row}>
+          <TouchableOpacity>
           <Image
-            source={require('../assets/Featured.png')}
+            source={require('../assets/Abaya.png')}
             style={styles.image}
           />
-          <Image
-            source={require('../assets/Featured.png')}
+          </TouchableOpacity>
+          <TouchableOpacity><Image
+            source={require('../assets/Abaya.png')}
             style={styles.image3}
           />
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -148,14 +154,14 @@ const styles=StyleSheet.create({
         margin: Metrics.smallMargin,
       },
       image3: {
-        width: Metrics.ratio(180), // Adjust the width to create square images
-        height: Metrics.ratio(150), // Adjust the height to create square images
-        margin: Metrics.smallMargin,
+        width: Metrics.ratio(200), // Adjust the width to create square images
+        height: Metrics.ratio(250), // Adjust the height to create square images
+        marginTop: Metrics.ratio(5),
       },
       image2: {
         width: Metrics.ratio(200), // Adjust the width to create square images
-        height: 150, // Adjust the height to create square images
-        margin: Metrics.smallMargin,
+        height:Metrics.ratio(150), // Adjust the height to create square images
+        marginTop: Metrics.ratio(5),
       },
 })
 export default Designers;

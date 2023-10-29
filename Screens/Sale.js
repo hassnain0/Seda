@@ -3,12 +3,21 @@ import {View,Text, StyleSheet,FlatList,ScrollView,Image,TouchableOpacity} from '
 import { ImageSlider } from "react-native-image-slider-banner";
 import { Metrics } from '../themes';
 
-
+const ColorSelection = ({ color, label, isSelected, onPress }) => {
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <View style={[styles.colorContainer, isSelected && styles.selectedColor, { backgroundColor: color }]}>
+        <Text>{label}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const products = [
   
-  { id: '1', imageSource: require('../assets/WhiteSleeve.png'), name: 'White short sleeve blouse', price: 'KWD25.00', size: 'M' },
-  { id: '2', imageSource: require('../assets/WhiteSleeve.png'), name: 'White short sleeve blouse', price: 'KWD25.00', size: 'L' },
+  { id: '1', imageSource: require('../assets/Dress1.png'), name: 'White short sleeve blouse', price: 'KWD25.00', size: 'M' },
+  { id: '2', imageSource: require('../assets/Dress2.png'), name: 'White short sleeve blouse', price: 'KWD25.00', size: 'L' },
+  { id: '3', imageSource: require('../assets/Dress3.png'), name: 'White short sleeve blouse', price: 'KWD25.00', size: 'S' },
   { id: '3', imageSource: require('../assets/WhiteSleeve.png'), name: 'White short sleeve blouse', price: 'KWD25.00', size: 'S' },
   // Add more product data as needed
 ];
@@ -18,9 +27,23 @@ const ProductItem = ({ product }) => {
   const toggleFavorite = () => {
     setFavorite(!isFavorite);
   };
+  const [selectedColor, setSelectedColor] = useState('');
 
+  const colorOptions = [
+    { color: 'black',  },
+    { color: 'white',  },
+    { color: '#34455E', },
+    { color: '#7A1D2F', },
+    { color: '#C7D1E7', },
+  ];
+  const handleColorPress = (color) => {
+    setSelectedColor(color);
+  };
+
+  
   return (
     <View style={styles.productItem}>
+     
      <View style={styles.imageContainer}>
         <Image source={product.imageSource} style={styles.productImage} />
                   <View style={styles.trolleyIconContainer}>
@@ -28,7 +51,24 @@ const ProductItem = ({ product }) => {
           </View>
         
       </View>
-      
+      <View>
+    <View style={styles.OptionContainer}>
+      {colorOptions.map((colorOption, index) => (
+        <ColorSelection
+          key={index}
+          color={colorOption.color}
+          isSelected={selectedColor === colorOption.color}
+          onPress={() => handleColorPress(colorOption.color)}
+        />
+      ))}
+      <View style={styles.SizeContainer}><Text style={styles.OptionTextContainer}>S</Text></View>
+      <View style={styles.SizeContainer}><Text style={styles.OptionTextContainer}>M</Text></View>
+      <View style={styles.SizeContainer}><Text style={styles.OptionTextContainer}>L</Text></View>
+      <View style={styles.SizeContainer}><Text style={styles.OptionTextContainer}>XL</Text></View>
+        </View>
+     
+      </View>
+
       <Text style={styles.ProductContainer}>{product.name}</Text>
       <Text>{product.price}</Text>
      
@@ -45,15 +85,15 @@ const ProductItem = ({ product }) => {
   );
 };
 const RoundImage = ({ imageSource }) => (
-  <View style={{ margin: 5, borderRadius: 50, overflow: 'hidden' }}>
+  <View style={{ margin: Metrics.ratio(5), borderRadius: 50, overflow: 'hidden' }}>
     <Image
       source={imageSource}
-      style={{ width: 65, height: 65 }}
+      style={{ width: Metrics.ratio(65), height: Metrics.ratio(65)}}
     />
   </View>
 );
 const Sale=()=>{
-  
+
    data=[
         { id: '1', imageSource: require('../assets/SportsWear.png') },
   { id: '2', imageSource: require('../assets/Bottoms.png') },
@@ -88,6 +128,7 @@ return (
     <Text style={styles.TextContainer}>Top Picks</Text>
     
     <View style={styles.productList}>
+      
           <FlatList
             data={products}
             horizontal
@@ -128,7 +169,6 @@ return (
 }
 const styles=StyleSheet.create({
     TextContainer:{
-       
         fontSize:20,
         fontWeight:'bold', 
         color:'#083166',
@@ -143,7 +183,7 @@ const styles=StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: '#083166',
-        marginLeft: 20,
+        marginLeft: Metrics.ratio(20),
       },
       productList: {
         flexDirection: 'row',
@@ -181,16 +221,34 @@ const styles=StyleSheet.create({
         position: 'absolute',
         bottom: Metrics.ratio(5),
         right: Metrics.ratio(5),
-
-        
         backgroundColor: 'transparent',
-        
       },
-        trolleyIcon: {
+    trolleyIcon: {
     width: Metrics.ratio(20),
     height: Metrics.ratio(20),
   },
+  colorContainer: {
+    width: Metrics.ratio(15),
+    height: Metrics.ratio(15),
+    borderColor:'black',
+    borderWidth: 0.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop:Metrics.ratio(5),
+    margin:Metrics.ratio(1),
+  },
+  OptionContainer:{
     
+  flexDirection:'row',
+  justifyContent:'left'
+  }  ,
+  SizeContainer:{
+    borderColor:'black',
     
+    marginLeft:Metrics.ratio(25)
+  },
+  OptionTextContainer:{
+    color:'#E8A08D'
+  }
 })
 export default Sale;
