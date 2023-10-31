@@ -79,6 +79,125 @@ const TabNavigator = () => {
           
             <Image
               source={require('../assets/Logo.png')}
+              style={{ width: 110, height: 37 ,marginRight:40}}
+            />
+              <TouchableOpacity><Image
+              source={require('../assets/Table.png')}
+              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+            /></TouchableOpacity>
+              <TouchableOpacity><Image
+              source={require('../assets/Matrix.png')}
+              style={{ width: Metrics.ratio(30), height:Metrics.ratio(27) ,left:20,marginRight:Metrics.ratio(2)}}
+            />
+            </TouchableOpacity>
+            <TouchableOpacity><Image
+              source={require('../assets/Square.png')}
+              style={{ width: Metrics.ratio(30), height: Metrics.ratio(27) ,left:Metrics.ratio(30),marginRight:Metrics.ratio(20)}}
+            />
+            </TouchableOpacity>
+            <TouchableOpacity><Image
+              source={require('../assets/Search.png')}
+              style={styles.IconContainer}
+
+            />
+            </TouchableOpacity>
+            <TouchableOpacity><Image
+              source={require('../assets/Cart.png')}
+              style={{  width: Metrics.ratio(20), height: Metrics.ratio(27) ,left:Metrics.ratio(30) ,marginRight:Metrics.ratio(2)}}
+            />
+            </TouchableOpacity>
+          </View>
+        ), }}/>
+         <Tab.Screen name="Categories" component={Categories}  options={{ tabBarIcon: ({ color, size }) => (
+           <Image source={require('../assets/Categories.png')}style={{width:22,height:22}} ></Image>
+           ),headerStyle: {
+          backgroundColor: '#083166', // Set your desired header color
+          
+        },
+        headerTitle: () => (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          
+            <Image
+              source={require('../assets/Logo.png')}
+              style={{ width: 110, height: 37 ,marginRight:40}}
+            />
+              <TouchableOpacity><Image
+              source={require('../assets/Table.png')}
+              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+            /></TouchableOpacity>
+              <TouchableOpacity><Image
+              source={require('../assets/Matrix.png')}
+              style={{ width: Metrics.ratio(30), height:Metrics.ratio(27) ,left:20,marginRight:Metrics.ratio(2)}}
+            />
+            </TouchableOpacity>
+            <TouchableOpacity><Image
+              source={require('../assets/Square.png')}
+              style={{ width: Metrics.ratio(30), height: Metrics.ratio(27) ,left:Metrics.ratio(30),marginRight:Metrics.ratio(20)}}
+            />
+            </TouchableOpacity>
+            <TouchableOpacity><Image
+              source={require('../assets/Search.png')}
+              style={styles.IconContainer}
+
+            />
+            </TouchableOpacity>
+            <TouchableOpacity><Image
+              source={require('../assets/Cart.png')}
+              style={{  width: Metrics.ratio(20), height: Metrics.ratio(27) ,left:Metrics.ratio(30) ,marginRight:Metrics.ratio(2)}}
+            />
+            </TouchableOpacity>
+          </View>
+        ),}}/>
+        <Tab.Screen name="Designers" component={Designers} options={{tabBarIcon: ({ color, size }) => (
+           <Image source={require('../assets/Designers.png')}style={{width:22,height:25}} ></Image>
+           ),headerStyle: {
+          backgroundColor: '#083166', // Set your desired header color
+          
+        },
+        headerTitle: () => (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          
+            <Image
+              source={require('../assets/Logo.png')}
+              style={{ width: 110, height: 37 ,marginRight:40}}
+            />
+              <TouchableOpacity><Image
+              source={require('../assets/Table.png')}
+              style={{ width: 30, height: 27 ,left:20,marginRight:10}}
+            /></TouchableOpacity>
+              <TouchableOpacity><Image
+              source={require('../assets/Matrix.png')}
+              style={{ width: Metrics.ratio(30), height:Metrics.ratio(27) ,left:20,marginRight:Metrics.ratio(2)}}
+            />
+            </TouchableOpacity>
+            <TouchableOpacity><Image
+              source={require('../assets/Square.png')}
+              style={{ width: Metrics.ratio(30), height: Metrics.ratio(27) ,left:Metrics.ratio(30),marginRight:Metrics.ratio(20)}}
+            />
+            </TouchableOpacity>
+            <TouchableOpacity><Image
+              source={require('../assets/Search.png')}
+              style={styles.IconContainer}
+
+            />
+            </TouchableOpacity>
+            <TouchableOpacity><Image
+              source={require('../assets/Cart.png')}
+              style={{  width: Metrics.ratio(20), height: Metrics.ratio(27) ,left:Metrics.ratio(30) ,marginRight:Metrics.ratio(2)}}
+            />
+            </TouchableOpacity>
+          </View>
+        ),}}/>
+         <Tab.Screen name="Mens & Kids" component={Cart} options={{tabBarIcon: ({ color, size }) => (
+           <Image source={require('../assets/Men.png')}style={{width:35,height:31}} ></Image>
+           ),headerStyle: {
+          backgroundColor: '#083166', // Set your desired header color
+          
+        },  headerTitle: () => (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          
+            <Image
+              source={require('../assets/Logo.png')}
               style={{ width: 110, height: 37 ,marginRight:60}}
             />
               <TouchableOpacity><Image
@@ -104,125 +223,7 @@ const TabNavigator = () => {
             </TouchableOpacity>
 
           </View>
-        ),}}/>
-         <Tab.Screen name="Categories" component={Categories}  options={{ tabBarIcon: ({ color, size }) => (
-           <Image source={require('../assets/Categories.png')}style={{width:22,height:22}} ></Image>
-           ),headerStyle: {
-          backgroundColor: '#083166', // Set your desired header color
-          
-        },
-        headerTitle: () => (
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          
-            <Image
-              source={require('../assets/Logo.png')}
-              style={styles.IconContainer}
-            />
-              <TouchableOpacity><Image
-              source={require('../assets/Table.png')}
-              style={styles.IconContainer}
-            /></TouchableOpacity>
-              <TouchableOpacity><Image
-              source={require('../assets/Matrix.png')}
-              style={styles.IconContainer}
-            />
-            </TouchableOpacity>
-            <TouchableOpacity><Image
-              source={require('../assets/Square.png')}
-              style={styles.IconContainer}
-            />
-            </TouchableOpacity>
-            <TouchableOpacity><Image
-              source={require('../assets/Search.png')}
-              style={styles.IconContainer}
-            />
-            </TouchableOpacity>
-            <TouchableOpacity><Image
-              source={require('../assets/Search.png')}
-              style={styles.IconContainer}
-            />
-            </TouchableOpacity>
-
-          </View>
-        )}}/>
-        <Tab.Screen name="Designers" component={Designers} options={{tabBarIcon: ({ color, size }) => (
-           <Image source={require('../assets/Designers.png')}style={{width:22,height:25}} ></Image>
-           ),headerStyle: {
-          backgroundColor: '#083166', // Set your desired header color
-          
-        },
-        headerTitle: () => (
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          
-            <Image
-              source={require('../assets/Logo.png')}
-              style={{ width: 110, height: 37 ,marginRight:60}}
-            />
-              <TouchableOpacity><Image
-              source={require('../assets/Table.png')}
-              style={styles.IconContainer}
-
-            /></TouchableOpacity>
-              <TouchableOpacity><Image
-              source={require('../assets/Matrix.png')}
-             style={{ width: Metrics.ratio(30), height: Metrics.ratio(30) ,left:Metrics.ratio(30),marginRight:Metrics.baseMargin}}
-
-            />
-            </TouchableOpacity>
-            <TouchableOpacity><Image
-              source={require('../assets/Square.png')}
-              style={styles.IconContainer}
-            />
-            </TouchableOpacity>
-            <TouchableOpacity><Image
-              source={require('../assets/Search.png')}
-              style={styles.IconContainer}
-            />
-            </TouchableOpacity>
-            <TouchableOpacity><Image
-              source={require('../assets/Search.png')}
-              style={styles.IconContainer}
-            />
-            </TouchableOpacity>
-          </View>
-        ),}}/>
-         <Tab.Screen name="Cart" component={Cart} options={{tabBarIcon: ({ color, size }) => (
-           <Image source={require('../assets/Cart.png')}style={{width:22,height:31}} ></Image>
-           ),headerStyle: {
-          backgroundColor: '#083166', // Set your desired header color
-          
-        },  headerTitle: () => (
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          
-            <Image
-              source={require('../assets/Logo.png')}
-              style={{ width: 110, height: 37 ,marginRight:60}}
-            />
-              <TouchableOpacity><Image
-              source={require('../assets/Table.png')}
-              style={styles.IconContainer}            /></TouchableOpacity>
-              <TouchableOpacity><Image
-              source={require('../assets/Matrix.png')}
-              style={styles.IconContainer}
-            />
-            </TouchableOpacity>
-            <TouchableOpacity><Image
-              source={require('../assets/Square.png')}
-              style={styles.IconContainer}
-            />
-            </TouchableOpacity>
-            <TouchableOpacity><Image
-              source={require('../assets/Search.png')}
-              style={styles.IconContainer}
-            />
-            </TouchableOpacity>
-            <TouchableOpacity><Image
-              source={require('../assets/Search.png')}
-              style={styles.IconContainer}
-            />
-            </TouchableOpacity>
-          </View>
-        ),}}/>
+              ),}}/>
       
     </Tab.Navigator>
   );

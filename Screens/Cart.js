@@ -1,5 +1,6 @@
 import React from 'react'
-import { View } from 'react-native';
+import { View,Text,StyleSheet } from 'react-native';
+
 const Cart=()=>{
   return(
     <View>
@@ -7,5 +8,9 @@ const Cart=()=>{
     </View>
   )
 }
+
+const styles=StyleSheet.create({
+  
+})
 export default Cart;
 

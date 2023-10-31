@@ -84,7 +84,7 @@ return (
         <View style={styles.row}>
           <TouchableOpacity>
           <Image
-            source={require('../assets/Abaya.png')}
+            source={require('../assets/Heels.png')}
             style={styles.image}
           />
           </TouchableOpacity>
@@ -154,7 +154,7 @@ const styles=StyleSheet.create({
         margin: Metrics.smallMargin,
       },
       image3: {
-        width: Metrics.ratio(200), // Adjust the width to create square images
+        width: Metrics.ratio(210), // Adjust the width to create square images
         height: Metrics.ratio(250), // Adjust the height to create square images
         marginTop: Metrics.ratio(5),
       },
